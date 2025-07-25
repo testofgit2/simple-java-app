@@ -1,26 +1,23 @@
-pipeline{
-    agent any     // specify the agent to run the pipeline on
-    
+pipeline {
+    agent any  // Runs on any available Jenkins agent
 
     stages {
-
         stage('Build') {
-            steps{
+            steps {
                 script {
                     echo 'Building...'
                     // Add your build commands here
                 }
             }
-    }
+        }
 
-    stages('test') {
-        steps {
-            script {
-                echo 'Testing...'
-                // Add your test commands here
+        stage('Test') {
+            steps {
+                script {
+                    echo 'Testing...'
+                    // Add your test commands here
+                }
             }
         }
     }
-
-}
 }

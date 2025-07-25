@@ -1,26 +1,30 @@
-node{                        // all the code and script that going to be configured  
-    git branch: 'main', url: 'https://github.com/testofgit2/simple-java-app.git'                       // for scripted pipeline you must define all expersion since he won't do anything more than what you asks for 
-        // this is the git repository that we are going to use
-    // Now you should specify the build steps    
-    stage('build'){
-        try{      // try catch block to handle errors   
-        sh'echo "building the application"' // sh means that we are going to run a shell command
-           }
-        catch (Exception e) {
-            sh'echo "Build failed"'
-            throw e // if the build fails, we throw an exception
+node { 
+    // Checkout the code from Git
+    stage('Checkout') {
+        git branch: 'main', url: 'https://github.com/testofgit2/simple-java-app.git'
+    }
+
+    // Build stage
+    stage('Build') {
+        try {
+            sh 'echo "Building the application"'
+        } catch (Exception e) {
+            sh 'echo "Build failed"'
+            throw e
         }
     }
 
-    stage('test'){
-        try{
-            if (env.BRANCE_NAME == 'feat')   // check if the branch name is feat
-            
-            sh'echo "running tests"'
-            else
-            sh'echo "No tests to run"'
+    // Test stage
+    stage('Test') {
+        try {
+            if (env.BRANCH_NAME == 'feat') {  // Corrected typo: BRANCE_NAME → BRANCH_NAME
+                sh 'echo "Running tests"'
+            } else {
+                sh 'echo "No tests to run"'
+            }
+        } catch (Exception e) {
+            sh 'echo "Test stage failed"'
+            throw e
         }
-        
-
-}
+    }
 }

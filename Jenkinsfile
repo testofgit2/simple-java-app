@@ -28,7 +28,7 @@ agent {
     // One or more steps need to be included within each condition's block.
   }
           failure {
-                   slackSend channel: '#jenkins-ci', message: ' slackSend "Build failed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)" ', teamDomain: 'lamona-group', tokenCredentialId: 'jenkins-slack'
+                   slackSend channel: '#jenkins-ci', message:  slackSend "Build failed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)" , teamDomain: 'lamona-group', tokenCredentialId: 'jenkins-slack'
 
     // One or more steps need to be included within each condition's block.
   }

@@ -22,16 +22,22 @@ agent {
             }
         }
     }
-    post {
-  success {
-     slackSend channel: '#jenkins-ci', message: ' slackSend "Build succeed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)" ', teamDomain: 'lamona-group', tokenCredentialId: 'jenkins-slack'
-    // One or more steps need to be included within each condition's block.
-  }
-          failure {
-                   slackSend channel: '#jenkins-ci', message:  slackSend "Build failed ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)" , teamDomain: 'lamona-group', tokenCredentialId: 'jenkins-slack'
-
-    // One or more steps need to be included within each condition's block.
-  }
+post {
+    success {
+        slackSend(
+            channel: '#jenkins-ci',
+            message: "✅ Build succeeded: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
+            teamDomain: 'lamona-group',
+            tokenCredentialId: 'jenkins-slack'
+        )
+    }
+    failure {
+        slackSend(
+            channel: '#jenkins-ci',
+            message: "❌ Build failed: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)",
+            teamDomain: 'lamona-group',
+            tokenCredentialId: 'jenkins-slack'
+        )
+    }
 }
-
 }
